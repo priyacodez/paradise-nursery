@@ -1,51 +1,107 @@
-```css
-/* Main application styling */
+
+/* ========================================
+   PARADISE NURSERY - APP STYLES
+   ======================================== */
+
+/* Main App Container */
 .App {
   min-height: 100vh;
-  background-image: url("./assets/plant-background.jpg");
+  width: 100%;
+}
+
+/* ========================================
+   LANDING PAGE
+   ======================================== */
+
+.landing-page {
+  min-height: 100vh;
+  width: 100%;
+
+  /* Background image for Paradise Nursery */
+  background-image: url("./assets/landing-page.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-}
 
-/* Landing page content */
-.landing-page {
-  min-height: 100vh;
+  /* Center the landing page content */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   text-align: center;
-  color: white;
-  background: rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
-/* Landing page heading */
-.landing-page h1 {
-  font-size: 3rem;
-  margin-bottom: 15px;
+/* Dark overlay over background image */
+.landing-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.35);
 }
 
-/* Landing page description */
-.landing-page p {
-  font-size: 1.2rem;
-  max-width: 600px;
-}
-
-/* Button styling */
+/* Keep landing page content above overlay */
+.landing-page h1,
+.landing-page p,
 .landing-page button {
-  padding: 12px 25px;
-  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Company Name */
+.landing-page h1 {
+  font-size: 55px;
+  margin: 0 0 20px 0;
+  color: white;
+  font-weight: bold;
+}
+
+/* Description */
+.landing-page p {
+  font-size: 20px;
+  color: white;
+  max-width: 600px;
+  margin-bottom: 25px;
+}
+
+/* Get Started Button */
+.landing-page button {
+  padding: 14px 30px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+
   background-color: #2e7d32;
   color: white;
-  font-size: 1rem;
+
+  font-size: 18px;
+  font-weight: bold;
+
   cursor: pointer;
 }
 
+/* Button Hover Effect */
 .landing-page button:hover {
   background-color: #1b5e20;
+  transform: scale(1.05);
 }
-```
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .landing-page h1 {
+    font-size: 40px;
+  }
+
+  .landing-page p {
+    font-size: 17px;
+    padding: 0 20px;
+  }
+}
+
