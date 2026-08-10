@@ -1,0 +1,51 @@
+```css
+/* Main application styling */
+.App {
+  min-height: 100vh;
+  background-image: url("./assets/plant-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Landing page content */
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Landing page heading */
+.landing-page h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+/* Landing page description */
+.landing-page p {
+  font-size: 1.2rem;
+  max-width: 600px;
+}
+
+/* Button styling */
+.landing-page button {
+  padding: 12px 25px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2e7d32;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.landing-page button:hover {
+  background-color: #1b5e20;
+}
+```
