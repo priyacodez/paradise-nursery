@@ -1,4 +1,4 @@
-```jsx
+
 import React from "react";
 
 function AboutUs() {
@@ -39,4 +39,4 @@ function AboutUs() {
 }
 
 export default AboutUs;
-```
+
