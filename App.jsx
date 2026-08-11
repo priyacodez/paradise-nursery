@@ -1,27 +1,26 @@
 
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import ProductList from "./ProductList";
 
 function App() {
+  const [showProductList, setShowProductList] = useState(false);
+
   return (
-    <div className="landing-page">
+    <div>
+      {!showProductList ? (
+        <div className="landing-page">
+          <h1>Paradise Nursery</h1>
 
-      <div className="landing-content">
-        <h1>Paradise Nursery</h1>
+          <p>Welcome to Paradise Nursery!</p>
+          <p>Find beautiful plants for your home and garden.</p>
 
-        <p>
-          Welcome to Paradise Nursery!
-          <br />
-          Discover beautiful plants for your home and garden.
-        </p>
-
-        <Link to="/products">
-          <button className="get-started-button">
+          <button onClick={() => setShowProductList(true)}>
             Get Started
           </button>
-        </Link>
-      </div>
-
+        </div>
+      ) : (
+        <ProductList />
+      )}
     </div>
   );
 }
