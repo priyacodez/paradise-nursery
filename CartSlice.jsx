@@ -10,8 +10,8 @@ const cartSlice = createSlice({
   initialState,
 
   reducers: {
-    // Add a plant to the cart
-    addToCart: (state, action) => {
+    // Add item to cart
+    addItem: (state, action) => {
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
       );
@@ -26,48 +26,37 @@ const cartSlice = createSlice({
       }
     },
 
-    // Increase quantity
-    increaseQuantity: (state, action) => {
-      const item = state.items.find(
-        (item) => item.id === action.payload
-      );
-
-      if (item) {
-        item.quantity += 1;
-      }
-    },
-
-    // Decrease quantity
-    decreaseQuantity: (state, action) => {
-      const item = state.items.find(
-        (item) => item.id === action.payload
-      );
-
-      if (item) {
-        if (item.quantity > 1) {
-          item.quantity -= 1;
-        } else {
-          state.items = state.items.filter(
-            (item) => item.id !== action.payload
-          );
-        }
-      }
-    },
-
     // Remove item from cart
-    removeFromCart: (state, action) => {
+    removeItem: (state, action) => {
       state.items = state.items.filter(
         (item) => item.id !== action.payload
       );
+    },
+
+    // Update item quantity
+    updateQuantity: (state, action) => {
+      const item = state.items.find(
+        (item) => item.id === action.payload.id
+      );
+
+      if (item) {
+        item.quantity = action.payload.quantity;
+
+        // Remove item if quantity becomes 0
+        if (item.quantity <= 0) {
+          state.items = state.items.filter(
+            (item) => item.id !== action.payload.id
+          );
+        }
+      }
     },
   },
 });
 
 export const {
-  addToCart,
-  increaseQuantity,
-  decreaseQuantity,
-  removeFromCart,
+  addItem,
+  removeItem,
+  updateQuantity,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
