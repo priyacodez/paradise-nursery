@@ -2,9 +2,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  increaseQuantity,
-  decreaseQuantity,
-  removeFromCart,
+  removeItem,
+  updateQuantity,
 } from "./CartSlice";
 import { Link } from "react-router-dom";
 
@@ -26,16 +25,34 @@ function CartItem() {
     0
   );
 
+  // Handle decrease button
+  const handleDecrease = (item) => {
+    if (item.quantity === 1) {
+      // Remove item when quantity reaches zero
+      dispatch(removeItem(item.id));
+    } else {
+      // Decrease quantity
+      dispatch(
+        updateQuantity({
+          id: item.id,
+          quantity: item.quantity - 1,
+        })
+      );
+    }
+  };
+
   return (
     <div className="cart-container">
       <h1>Shopping Cart</h1>
 
       {cartItems.length === 0 ? (
-        <div>
+        <div className="empty-cart">
           <h2>Your cart is empty</h2>
 
           <Link to="/products">
-            <button>Continue Shopping</button>
+            <button className="continue-shopping">
+              Continue Shopping
+            </button>
           </Link>
         </div>
       ) : (
@@ -56,33 +73,50 @@ function CartItem() {
                 <h2>{item.name}</h2>
 
                 {/* Unit Price */}
-                <p>Unit Price: ₹{item.price}</p>
+                <p className="unit-price">
+                  Unit Price: ₹{item.price}
+                </p>
 
                 {/* Quantity Controls */}
                 <div className="quantity-controls">
+
+                  {/* Decrease Quantity */}
                   <button
-                    onClick={() => dispatch(decreaseQuantity(item.id))}
+                    className="decrease-btn"
+                    onClick={() => handleDecrease(item)}
                   >
                     -
                   </button>
 
-                  <span>{item.quantity}</span>
+                  <span className="quantity">
+                    {item.quantity}
+                  </span>
 
+                  {/* Increase Quantity */}
                   <button
-                    onClick={() => dispatch(increaseQuantity(item.id))}
+                    className="increase-btn"
+                    onClick={() =>
+                      dispatch(
+                        updateQuantity({
+                          id: item.id,
+                          quantity: item.quantity + 1,
+                        })
+                      )
+                    }
                   >
                     +
                   </button>
                 </div>
 
-                {/* Total cost for this plant */}
-                <p>
+                {/* Total Cost for Each Plant */}
+                <p className="item-total">
                   Total: ₹{item.price * item.quantity}
                 </p>
 
                 {/* Delete Button */}
                 <button
-                  onClick={() => dispatch(removeFromCart(item.id))}
+                  className="delete-btn"
+                  onClick={() => dispatch(removeItem(item.id))}
                 >
                   Delete
                 </button>
@@ -94,21 +128,25 @@ function CartItem() {
           <div className="cart-summary">
             <h2>Cart Summary</h2>
 
-            <p>Total Items: {totalItems}</p>
+            <p className="total-items">
+              Total Items: {totalItems}
+            </p>
 
-            <h2>Total Amount: ₹{totalAmount}</h2>
+            <h2 className="total-amount">
+              Total Amount: ₹{totalAmount}
+            </h2>
 
             {/* Checkout Button */}
             <button
+              className="checkout-btn"
               onClick={() => alert("Coming Soon")}
-              className="checkout-button"
             >
               Checkout
             </button>
 
-            {/* Continue Shopping */}
+            {/* Continue Shopping Button */}
             <Link to="/products">
-              <button className="continue-button">
+              <button className="continue-shopping">
                 Continue Shopping
               </button>
             </Link>
